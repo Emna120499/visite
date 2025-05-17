@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bienvenue</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    #content {
+      display: none;
+    }
+    #passwordBox {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    input[type=password] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #002f5a;
+    }
+    header {
+      background-color: #004080;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img {
+      height: 60px;
+    }
+    header h1 {
+      flex: 1;
+      text-align: center;
+      margin: 0;
+    }
+    section {
+      padding: 20px;
+    }
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .gallery img {
+      width: 300px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .pdf-download {
+      margin: 30px auto;
+      text-align: center;
+    }
+    .pdf-download a {
+      text-decoration: none;
+      background-color: #004080;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .pdf-download a:hover {
+      background-color: #002f5a;
+    }
+    footer {
+      background-color: #004080;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    #error {
+      color: red;
+      display: none;
+      margin-top: 10px;
+    }
+	.carousel-wrapper {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 20px 40px;
+}
+
+.carousel img {
+  flex: 0 0 auto;
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  scroll-snap-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #004080;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-button.left {
+  left: 5px;
+}
+
+.carousel-button.right {
+  right: 5px;
+}
+
+.carousel-button:hover {
+  background-color: #002f5a;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <div id="passwordBox">
+    <h2>Entrez le mot de passe pour accéder à la visite</h2>
+    <input type="password" id="pwd" placeholder="Mot de passe" />
+    <br />
+    <button onclick="checkPassword()">Valider</button>
+    <p id="error">Mot de passe incorrect</p>
+  </div>
+
+  <div id="content">
+    <header>
+      <img src="logo1.png" alt="Logo gauche">
+      <h1>Bienvenue à la base aérienne rmeda</h1>
+      <img src="logo2.png" alt="Logo droite">
+    </header>
+
+    <section>
+      <h2>Galerie Photos</h2>
+      <p>Retrouvez ici les meilleurs moments de votre visite.</p>
+ <div class="carousel-wrapper">
+  <button class="carousel-button left" onclick="scrollCarousel(-1)">&#10094;</button>
+
+  <div class="carousel" id="carousel">
+    <img src="logo.jpg" alt="Photo 1" />
+    <img src="téléchargement.png" alt="Photo 2" />
+    <img src="logo.jpg" alt="Photo 3" />
+     <img src="téléchargement.png" alt="Photo 4" />
+     <img src="logo.jpg" alt="Photo 5" />
+  </div>
+
+  <button class="carousel-button right" onclick="scrollCarousel(1)">&#10095;</button>
+</div>
+    </section>
+
+    <section class="pdf-download">
+      <h2>Fichier PDF</h2>
+      <p>Téléchargez le document de la visite :</p>
+      <a href="document.pdf" target="_blank">📄 Télécharger le PDF</a>
+    </section>
+
+    <footer>
+      &copy; 2025 Votre Entreprise - Tous droits réservés
+    </footer>
+  </div>
+
+  <script>
+    const correctPassword = "idn2025";
+
+    function checkPassword() {
+      const input = document.getElementById("pwd").value;
+      const errorMsg = document.getElementById("error");
+      if (input === correctPassword) {
+        document.getElementById("passwordBox").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        errorMsg.style.display = "none";
+      } else {
+        errorMsg.style.display = "block";
+      }
+    }
+
+  function scrollCarousel(direction) {
+    const container = document.getElementById("carousel");
+    const scrollAmount = 320;
+    container.scrollBy({
+      left: scrollAmount * direction,
+      behavior: "smooth"
+    });
+  }
+
+  </script>
+
+</body>
+</html>
